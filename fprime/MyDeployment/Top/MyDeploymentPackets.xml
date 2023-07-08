@@ -1,0 +1,33 @@
+<packets name="MyDeploymentPackets" namespace="MyDeployment" size="111">
+
+    <import_topology>MyDeployment/Top/MyDeploymentTopologyAppAi.xml</import_topology>
+
+    <packet name="CDH" id="1" level="1">
+        <channel name="cmdDisp.CommandsDispatched"/>
+        <channel name="rateGroup1.RgMaxTime"/>
+        <channel name="fileUplinkBufferManager.TotalBuffs"/>
+        <channel name="fileUplinkBufferManager.CurrBuffs"/>
+        <channel name="fileUplinkBufferManager.HiBuffs"/>
+        <channel name="fileUplink.FilesReceived"/>
+        <channel name="fileUplink.PacketsReceived"/>
+        <channel name="cmdSeq.CS_LoadCommands"/>
+        <channel name="cmdSeq.CS_CancelCommands"/>
+        <channel name="cmdSeq.CS_CommandsExecuted"/>
+        <channel name="cmdSeq.CS_SequencesCompleted"/>
+        <channel name="rateGroup2.RgMaxTime"/>
+    </packet>
+
+    <packet name="CDHErrors" id="2" level="1">
+        <channel name="rateGroup1.RgCycleSlips"/>
+        <channel name="rateGroup2.RgCycleSlips"/>
+        <channel name="fileUplink.Warnings"/>
+        <channel name="cmdSeq.CS_Errors"/>
+        <channel name="fileUplinkBufferManager.NoBuffs"/>
+        <channel name="fileUplinkBufferManager.EmptyBuffs"/>
+        <channel name="cmdDisp.CommandErrors"/>
+    </packet>
+
+    <ignore>
+        <channel name="helloWorld.GreetingCount"/>
+    </ignore>
+</packets>

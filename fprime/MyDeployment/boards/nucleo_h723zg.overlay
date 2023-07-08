@@ -1,0 +1,42 @@
+/*
+ * Copyright (c) 2023 aris-space
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* This devicetree overlay file will be automatically picked by the Zephyr
+ * build system when building the sample for the nucleo_h723zg board. It shows
+ * how the example-application can be built on sample boards already provided
+ * by Zephyr.
+ */
+
+
+/ {
+	fstab {
+		compatible = "zephyr,fstab";
+		lfs1: lfs1 {
+			compatible = "zephyr,fstab,littlefs";
+            /* Flashword size of STM32H732ZG internal flash is 32B */
+			read-size = <32>;
+			prog-size = <32>;
+			cache-size = <256>;
+			lookahead-size = <32>;
+			block-cycles = <512>;
+			partition = <&storage_partition>;
+			mount-point = "/seq";
+    	};
+	};
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		/* Use second half of flash for the filesystem. */
+		storage_partition: partition@80000 {
+			label = "storage";
+			reg = <0x80000 DT_SIZE_K(512)>;
+		};
+	};
+};
